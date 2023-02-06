@@ -80,9 +80,9 @@ if ($server == 'localhost:8888') {
     $database = 'db_kubu_gadang';
     $password = '';
 } else {
-    $username = '';
-    $database = '';
-    $password = '';
+    $username = 'teamclov_clover';
+    $database = 'teamclov_demo_4';
+    $password = 'teamclov_clover';
 }
 $active_group = 'default';
 $query_builder = true;
