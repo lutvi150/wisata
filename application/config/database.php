@@ -73,11 +73,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $server = $_SERVER['HTTP_HOST'];
 if ($server == 'localhost:8888') {
     $username = 'root';
-    $database = 'wisata';
+    $database = 'db_kubu_gadang';
     $password = 'root';
 } else if ($server == 'localhost') {
     $username = 'root';
-    $database = 'wisata';
+    $database = 'db_kubu_gadang';
     $password = '';
 } else {
     $username = '';

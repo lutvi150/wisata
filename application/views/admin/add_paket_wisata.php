@@ -42,6 +42,7 @@
 											<select name="satuan" class="form-control" id="satuan">
 												<option value="1">Per Orang</option>
 												<option value="2">Per Kelompok</option>
+												<option value="3">Per Pax</option>
 											</select>
 											<span class="text-error esatuan"></span>
 										</div>
@@ -49,7 +50,7 @@
 									<div class="form-group row mb-12">
 										<label class="col-form-label col-md-3 text-md-right">Keterangan</label>
 										<div class="col-sm-12 col-md-9">
-											<textarea nama="keterangan" class="summernote-simple"></textarea>
+											<textarea name="keterangan" class="summernote-simple"></textarea>
 											<span class="text-error eketerangan"></span>
 										</div>
 									</div>
@@ -97,6 +98,7 @@
 								</div>
 								<button type="button" onclick="store_paket()" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Simpan
 									Paket</button>
+									<a href="<?=base_url('admin/paket_wisata')?>" class="btn btn-info btn-sm"><i class="fa fa-reply"></i> Kembali</a>
 							</div>
 						</form>
 					</div>

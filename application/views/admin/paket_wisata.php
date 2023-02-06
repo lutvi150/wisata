@@ -41,21 +41,31 @@
 										</tr>
 									</thead>
 									<tbody>
+										<?php foreach ($paket_wisata as $key => $value): ?>
+											<?php if ($value->satuan == 1) {
+    $satuan = 'Per Orang';
+} elseif ($value->satuan == 2) {
+    $satuan = 'Per Kelompok';
+} elseif ($value->satuan == 3) {
+    $satuan = 'Per Pax';
+}?>
 										<tr>
 											<td>
-												1
+												<?=$key + 1?>
 											</td>
-											<td>Nama</td>
-											<td>Rp.
+											<td><?=$value->nama_paket?></td>
+											<td>Rp. <?=number_format($value->harga_paket) . " /" . $satuan?>
 											</td>
-											<td>Orang/ Rombongan
+											<td>
+												<?=$satuan?>
 											</td>
-											<td>-</td>
+											<td><?=$value->keterangan?></td>
 											<td class="text-center">
-												<div class="badge badge-success">0</div>
+												<div class="badge badge-success"><?=$value->total_kunjungan?></div>
 											</td>
-											<td><a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a><a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+											<td><a href="#" onclick="hapus(<?=$value->id_paket?>)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a><a href="<?=base_url('admin/edit_paket_wisata/' . $value->id_paket)?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
 										</tr>
+										<?php endforeach;?>
 									</tbody>
 								</table>
 							</div>

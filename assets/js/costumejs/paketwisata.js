@@ -120,13 +120,15 @@ store_paket = () => {
 				});
 			} else {
 				swal({
-					title: `${response.msg}`,
-					confirmButtonText: 'Oke'
-				}).then((result) => {
-					if (result.isConfirmed) {
+					title: 'Berhasil',
+					text: 'Paket Wisata berhasil di tambahkan',
+					icon: 'success',
+				  })
+				  .then((willDelete) => {
+					if (willDelete) {
 						location.href = baseUrl + '/admin/paket_wisata'
-					}
-				});
+					} 
+				  });
 			}
 		},
 		error: function () {

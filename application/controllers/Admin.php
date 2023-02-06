@@ -94,7 +94,7 @@ class Admin extends CI_Controller
     public function paket_wisata(Type $var = null)
     {
         $data['content'] = 'admin/paket_wisata';
-        $data['paket_wisata'] = null;
+        $data['paket_wisata'] = $this->paket_wisata->get_semua_paket();
         $this->load->view('layout/template', $data, false);
     }
     // add vacation package
@@ -159,24 +159,24 @@ class Admin extends CI_Controller
             ],
 
         ];
-        $this->form_validation->set_rules($validation_config);
-        if ($this->form_validation->run() == false) {
-            $response = [
-                'status' => 'validation failed',
-                'msg' => $this->form_validation->error_array(),
-            ];
-        } else {
-            $this->paket_wisata->update_paket();
-            if ($status == 'store') {
-                $msg = 'Paket berhasil di tambahkan';
-            } else {
-                $msg = 'Paket berhasil di update';
-            }
-            $response = [
-                'status' => 'success',
-                'msg' => $msg,
-            ];
-        }
+        // $this->form_validation->set_rules($validation_config);
+        // if ($this->form_validation->run() == false) {
+        //     $response = [
+        //         'status' => 'validation failed',
+        //         'msg' => $this->form_validation->error_array(),
+        //     ];
+        // } else {
+        //     $this->paket_wisata->update_paket();
+        //     if ($status == 'store') {
+        $msg = 'Paket berhasil di tambahkan';
+        //     } else {
+        //         $msg = 'Paket berhasil di update';
+        //     }
+        $response = [
+            'status' => 'success',
+            'msg' => $msg,
+        ];
+        // }
         echo json_encode($response);
     }
     // upload photo package

@@ -13,7 +13,7 @@ CREATE TABLE `tb_foto` (
   `foto` varchar(255) DEFAULT NULL,
   `foto_unggulan` varchar(5) DEFAULT NULL,
   UNIQUE KEY `id` (`id_foto`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `tb_paket_wisata` (
   `id_paket` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -25,7 +25,7 @@ CREATE TABLE `tb_paket_wisata` (
   `lat` varchar(255) DEFAULT NULL,
   `long` varchar(255) DEFAULT NULL,
   UNIQUE KEY `id` (`id_paket`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `tb_profil` (
   `id_profil` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -50,14 +50,15 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tb_foto` (`id_foto`, `id_paket`, `foto`, `foto_unggulan`) VALUES
-(2, 1, 'uploads/502171c15a0ca89883842265f023711e.jpg', '0');
-INSERT INTO `tb_foto` (`id_foto`, `id_paket`, `foto`, `foto_unggulan`) VALUES
-(3, 1, 'uploads/c0cbd8c74761c440e2b8b10dba096a9c.PNG', '1');
-
+(4, 1, 'uploads/21fe636ed70e437a7bcbea7ad3db62b1.png', '1'),
+(5, 2, 'uploads/c254f8b188c4b30b54ffa8863e9d3c18.png', '1');
 
 INSERT INTO `tb_paket_wisata` (`id_paket`, `nama_paket`, `harga_paket`, `satuan`, `keterangan`, `total_kunjungan`, `lat`, `long`) VALUES
-(1, '-', 0, '-', '-', 0, '0', '0');
-
+(1, 'Makan Bajamba', 90000, '3', '<p>Merupakan salah satu tradisi makan bersama di Kubu Gadang yang penyajian lauk pauknya disusun dalam dulang. Biasanya disajikan di berbagai tempat baik di dalam maupun di luar ruangan degan disuguhkan pemandangan sawah yang asri dan indah<br></p>', 0, '0', '0');
+INSERT INTO `tb_paket_wisata` (`id_paket`, `nama_paket`, `harga_paket`, `satuan`, `keterangan`, `total_kunjungan`, `lat`, `long`) VALUES
+(2, 'Belajar membatik', 20000, '3', '<p class=\"MsoNormal\"><span lang=\"SV\">Membatik\r\nmerupakan seni menggambar di atas kain dengan coating yang berisi tinta khusus.\r\nDesa Kubu Gadang juga menawarkan paket membatik dengan pemandangan alam yang\r\nasri dan memanjakan mata. Belajar membatik di Kubu gadang untuk minimal 20 px.<o:p></o:p></span></p>', 0, '0', '0');
+INSERT INTO `tb_paket_wisata` (`id_paket`, `nama_paket`, `harga_paket`, `satuan`, `keterangan`, `total_kunjungan`, `lat`, `long`) VALUES
+(3, '-', 0, '-', '-', 0, '0', '0');
 
 
 
