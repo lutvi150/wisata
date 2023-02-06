@@ -1,4 +1,4 @@
-<?php $this->load->view('auth/header') ?>
+<?php $this->load->view('auth/header')?>
 <body>
 	<div id="app">
 		<section class="section">
@@ -7,8 +7,8 @@
 					<div
 						class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
 						<div class="login-brand">
-							<img src="<?=base_url();?>assets/img/stisla-fill.svg" alt="logo" width="100"
-								class="shadow-light rounded-circle">
+						<img src="<?=base_url();?>assets/img/logo_padang_panjang.png" alt="logo" width="100"
+								class="shadow-light">
 						</div>
 
 						<div class="card card-primary">
@@ -17,12 +17,12 @@
 							</div>
 
 							<div class="card-body">
-								<form method="POST" action="#" class="needs-validation" novalidate="">	
+								<form method="POST" id="register-form" action="#" class="needs-validation" novalidate="">
 									<div class="form-group">
 										<label for="nama">Nama</label>
 										<input id="nama" type="nama" class="form-control" name="nama" tabindex="1"
 											required autofocus>
-										<div class="invalid-feedback">
+										<div class="invalid-feedback enama">
 											Please fill in your name
 										</div>
 									</div>
@@ -30,7 +30,7 @@
 										<label for="email">Email</label>
 										<input id="email" type="email" class="form-control" name="email" tabindex="2"
 											required autofocus>
-										<div class="invalid-feedback">
+										<div class="invalid-feedback eemail">
 											Please fill in your email
 										</div>
 									</div>
@@ -41,7 +41,7 @@
 										</div>
 										<input id="password" type="password" class="form-control" name="password"
 											tabindex="3" required>
-										<div class="invalid-feedback">
+										<div class="invalid-feedback epassword">
 											please fill in your password
 										</div>
 									</div>
@@ -51,7 +51,7 @@
 										</div>
 										<input id="upassword" type="password" class="form-control" name="upassword"
 											tabindex="4" required>
-										<div class="invalid-feedback">
+										<div class="invalid-feedback eupassword">
 											please fill in your password
 										</div>
 									</div>
@@ -65,7 +65,7 @@
 									</div>
 
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+										<button type="button" onclick="register()" class="btn btn-primary btn-lg btn-block" tabindex="4">
 											Daftar
 										</button>
 									</div>
@@ -77,7 +77,7 @@
 							Suda punya account? <a href="<?=base_url('controller/login')?>">Login Disini</a>
 						</div>
 						<div class="simple-footer">
-							Copyright &copy; <?=$this->config->item('app_name')." tahun ".date('Y')?>
+							Copyright &copy; <?=$this->config->item('app_name') . " tahun " . date('Y')?>
 						</div>
 					</div>
 				</div>
@@ -85,7 +85,31 @@
 		</section>
 	</div>
 <?php $this->load->view('auth/script');
- ?>
+?>
 </body>
+<script>
+	function register() {
+		$(".invalid-feedback").text('');
+		$("#register-form").ajaxForm({
+			type: "POST",
+			url: baseUrl+"/controller/register_user",
+			dataType: "JSON",
+			success: function (response) {
+				if (response.status=='validation failed') {
+					$.each(response.msg, function (index, value) { 
+						 $(".e"+index).text(value);
+					});
+				}else if(response.status=='password not match') {
+					Swal.fire(`${response.msg}`)
+				}else{
+					$("input").val('');
+					Swal.fire(`${response.msg}`)
+				}
+			},error:function(){
+				Swal.fire('Something went wrong');
+			}
+		}).submit();
+	 }
+</script>
 
 </html>

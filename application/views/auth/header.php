@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 	<title><?=$this->config->item('app_name')?></title>
-
+	<link rel="shortcut icon" href="<?=base_url();?>assets/img/logo_padang_panjang.png" type="image/x-icon">
 	<!-- General CSS Files -->
 	<link rel="stylesheet" href="<?=base_url();?>assets/modules/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?=base_url();?>assets/modules/fontawesome/css/all.min.css">
@@ -18,6 +18,9 @@
 	<link rel="stylesheet" href="<?=base_url();?>assets/css/components.css">
 	<!-- Start GA -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+	<script>
+	let baseUrl="<?=base_url();?>";
+	</script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 
