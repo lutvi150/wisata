@@ -34,3 +34,8 @@
 	</script>
 	<!-- /END GA -->
 </head>
+<style>
+	.text-error{
+		color: red !important
+	}
+</style>

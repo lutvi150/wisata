@@ -19,6 +19,7 @@ class Controller extends CI_Controller
     public function login(Type $var = null)
     {
         $role = $this->session->userdata('role');
+        $id_user = $this->session->userdata('id_user');
         if ($role == 'admin') {
             redirect('admin');
         } elseif ($role == 'pelanggan') {
@@ -40,7 +41,8 @@ class Controller extends CI_Controller
     }
     public function isi_data_diri($var = null)
     {
-		
+        $data = null;
+        $this->load->view('pelanggan/isi_data_diri', $data);
     }
 // use for registration
     public function register_user(Type $var = null)

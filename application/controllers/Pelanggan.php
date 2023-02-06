@@ -12,6 +12,7 @@ class Pelanggan extends CI_Controller
         $this->load->model('ModelUser', 'user');
         $this->load->model('ModelPaketWisata', 'paket_wisata');
         $this->load->model('ModelFoto', 'foto');
+        $this->id_user = $this->session->userdata('id_user');
         if ($this->session->userdata('role') !== 'pelanggan') {
             $this->session->set_flashdata('error', 'Akses tidak di izinkan');
             redirect('controller/login');
@@ -36,6 +37,76 @@ class Pelanggan extends CI_Controller
         $data['content'] = 'pelanggan/keranjang';
         $data['paket'] = $this->model->find_data('tb_paket', 'id_paket', $id_paket)->row();
         $this->load->view('layout/template', $data, false);
+    }
+    // store data diri
+    public function update_data_diri(Type $var = null)
+    {
+        $this->form_validation->set_rules('nomor_kontak', 'Nomor Kontak', 'trim|required|min_length[8]|max_length[15]|numeric', [
+            'required' => 'Nomor Kontak tidak boleh kosong',
+            'min_length' => 'Nomor Kontak  minimal 10 angka',
+            'max_length' => 'Nomor Kontak maksimal 15 angka',
+            'numeric' => 'Nomor Kontak harus berupa angka',
+        ]);
+        $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required', [
+            'required' => 'Alamat tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'trim|required', [
+            'rquired' => 'Jenis Kelamin tidak boleh kosong',
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $response = [
+                'status' => 'validation failed',
+                'msg' => $this->form_validation->error_array(),
+            ];
+        } else {
+            $upload = $this->upload_image('foto');
+            if ($upload['status'] == 'failed') {
+                $response = [
+                    'status' => 'validation failed',
+                    'msg' => [
+                        'image' => $upload['error'],
+                    ],
+                ];
+            } else {
+                $post = $this->input->post();
+                $check_data = $this->model->find_data('tb_profil', 'id_user', $this->id_user)->row();
+                $update = [
+                    'id_user' => $this->id_user,
+                    'no_hp' => $post['nomor_kontak'],
+                    'alamat' => $post['alamat'],
+                    'jenis_kelamin' => $post['jenis_kelamin'],
+                    'foto' => 'uploads/' . $upload['data']['file_name'],
+                ];
+                if ($check_data) {
+                    $this->model->update_data('tb_profil', $update, 'id_user', $this->id_user);
+                } else {
+                    $this->model->create_data('tb_profil', $update);
+                }
+                $response = [
+                    'status' => 'success',
+                    'msg' => 'isi data berhasil',
+                ];
+            }
+        }
+        echo json_encode($response);
+
+    }
+    public function upload_image($file_name)
+    {
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload($file_name)) {
+            $response = ['status' => 'failed', 'error' => $this->upload->display_errors()];
+        } else {
+            $data = $this->upload->data();
+            $response = ['status' => 'success', 'data' => $data];
+        }
+        return $response;
+
     }
 
 }

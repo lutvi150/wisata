@@ -22,17 +22,17 @@
 										<label for="nama">Nama</label>
 										<input id="nama" type="nama" class="form-control" name="nama" tabindex="1"
 											required autofocus>
-										<div class="invalid-feedback enama">
-											Please fill in your name
-										</div>
+										<span class=" text-error enama">
+
+										</span>
 									</div>
 									<div class="form-group">
 										<label for="email">Email</label>
 										<input id="email" type="email" class="form-control" name="email" tabindex="2"
 											required autofocus>
-										<div class="invalid-feedback eemail">
-											Please fill in your email
-										</div>
+										<span class="text-error eemail">
+
+										</span>
 									</div>
 
 									<div class="form-group">
@@ -41,9 +41,9 @@
 										</div>
 										<input id="password" type="password" class="form-control" name="password"
 											tabindex="3" required>
-										<div class="invalid-feedback epassword">
-											please fill in your password
-										</div>
+										<span class="text-error epassword">
+
+										</span>
 									</div>
 									<div class="form-group">
 										<div class="d-block">
@@ -51,9 +51,9 @@
 										</div>
 										<input id="upassword" type="password" class="form-control" name="upassword"
 											tabindex="4" required>
-										<div class="invalid-feedback eupassword">
-											please fill in your password
-										</div>
+										<span class="text-error eupassword">
+
+										</span>
 									</div>
 
 									<div class="form-group">
@@ -89,14 +89,14 @@
 </body>
 <script>
 	function register() {
-		$(".invalid-feedback").text('');
+		$(".text-error").text('');
 		$("#register-form").ajaxForm({
 			type: "POST",
 			url: baseUrl+"/controller/register_user",
 			dataType: "JSON",
 			success: function (response) {
 				if (response.status=='validation failed') {
-					$.each(response.msg, function (index, value) { 
+					$.each(response.msg, function (index, value) {
 						 $(".e"+index).text(value);
 					});
 				}else if(response.status=='password not match') {
