@@ -33,6 +33,9 @@ class Pelanggan extends CI_Controller
     public function store_keranjang($id_paket)
     {
 
+        $data['content'] = 'pelanggan/keranjang';
+        $data['paket'] = $this->model->find_data('tb_paket', 'id_paket', $id_paket)->row();
+        $this->load->view('layout/template', $data, false);
     }
 
 }
