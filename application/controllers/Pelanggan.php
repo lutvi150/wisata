@@ -35,7 +35,7 @@ class Pelanggan extends CI_Controller
     {
 
         $data['content'] = 'pelanggan/keranjang';
-        $data['paket'] = $this->model->find_data('tb_paket', 'id_paket', $id_paket)->row();
+        $data['paket'] = $this->model->find_data('tb_paket_wisata', 'id_paket', $id_paket)->row();
         $this->load->view('layout/template', $data, false);
     }
     // store data diri
@@ -97,6 +97,7 @@ class Pelanggan extends CI_Controller
 
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['encrypt_name'] = true;
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload($file_name)) {

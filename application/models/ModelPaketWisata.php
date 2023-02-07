@@ -93,6 +93,12 @@ class ModelPaketWisata extends CI_Model
         $this->db->where('id_paket', $id_paket);
         $this->db->order_by('foto_unggulan', 'desc');
         return $this->db->get()->result();
+    } // use for count paket
+    public function count_paket(Type $var = null)
+    {
+        $this->db->from($this->table);
+        $this->db->where($this->nama_paket . " !=", '-');
+        return $this->db->count_all_results();
     }
 
 }
