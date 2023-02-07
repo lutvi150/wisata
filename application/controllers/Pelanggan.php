@@ -109,7 +109,58 @@ class Pelanggan extends CI_Controller
         return $response;
 
     }
+    public function store_booking(Type $var = null)
+    {
+        $post = $this->input->post();
+        $insert = [
+            'id_paket' => $post['id_paket'],
+            'id_user' => $this->id_user,
+            'nomor_booking' => "ORDER-" . date('YmdHis'),
+            'tanggal_booking' => $post['tanggal_booking'],
+            'jumlah_peserta' => $post['total_order'],
+            'status_booking' => 'Menunggu Pembayaran',
+            'total_biaya' => $post['harga'] * $post['total_order'],
+            'status_pembayaran' => 'Menunggu Pembayaran',
+            'tanggal_transaksi' => date('Y-m-d H:i:s'),
+        ];
+        if ($post['satuan'] !== 1) {
+            $this->form_validation->set_rules('total_order', 'Total Order', 'trim|required|numeric', [
+                'required' => 'Total Order tidak boleh kosong',
+                'numeric' => 'Total Order harus berupa angka',
+            ]);
 
+            if ($this->form_validation->run() == false) {
+                $response = [
+                    'status' => 'validation failed',
+                    'msg' => $this->form_validation->error_array(),
+                ];
+            } else {
+                if ($post['total_order'] > 0) {
+                    $this->model->insert('tb_data_booking', $insert);
+                    $response = [
+                        'status' => 'success',
+                        'insert' => $insert,
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'validation failed',
+                        'msg' => [
+                            'total_order' => 'Tidak boleh 0',
+                        ],
+                    ];
+                }
+            }
+
+        }
+
+        echo json_encode($response);
+    }
+    public function transaksi(Type $var = null)
+    {
+        $data['content'] = 'pelanggan/transaksi';
+        $data['transaksi'] = $this->model->transaksi_user($this->id_user);
+        $this->load->view('layout/template', $data, false);
+    }
 }
 
 /* End of file  Pelanggan.php */

@@ -79,7 +79,15 @@ class Model extends CI_Model
     {
         return $this->db->get($tabel);
     }
+// costume query
+    public function transaksi_user($id_user)
+    {
+        $this->db->from('tb_data_booking as a');
+        $this->db->join('tb_paket_wisata as b', 'a.id_paket = b.id_paket');
+        $this->db->where('a.id_user', $id_user);
+        return $this->db->get()->result();
 
+    }
 }
 
 /* End of file Model.php */

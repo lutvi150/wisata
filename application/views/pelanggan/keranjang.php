@@ -27,7 +27,8 @@
 						<div class="card-header">
 							<h4>Booking Paket Wisata</h4>
 						</div>
-						<form action="#" id="store-produk" method="post">
+						<form action="#" id="store-keranjang" method="post">
+							<input type="text" hidden name="id_paket" value="<?=$paket->id_paket?>">
 							<div class="card-body row">
 								<div class="col-12 col-md-6 col-lg-6">
 									<div class="form-group row mb-12">
@@ -47,8 +48,8 @@
 									<div class="form-group row mb-12">
 										<label class="col-form-label col-md-3 text-md-right">Satuan</label>
 										<div class="col-sm-12 col-md-9">
-
-											<input type="text" class="form-control" name="satuan" readonly value="Per <?=$satuan?>" >
+											<input hidden type="text" name="satuan" value="<?=$paket->satuan?>">
+											<input type="text" class="form-control" name="" readonly value="Per <?=$satuan?>" >
 											<span class="text-error esatuan"></span>
 										</div>
 									</div>
@@ -57,6 +58,13 @@
 										<div class="col-sm-12 col-md-9">
 											<textarea name="" class="form-control" id="" cols="30" readonly rows="10"><?=$paket->keterangan?></textarea>
 											<span class="text-error eketerangan"></span>
+										</div>
+									</div>
+									<div class="form-group row mb-12">
+										<label class="col-form-label col-md-3 text-md-right">Tanggal Kegiatan</label>
+										<div class="col-sm-12 col-md-9">
+											<input type="text" name="tanggal_booking"  value="" class="form-control datepicker">
+											<span class="text-error elong"></span>
 										</div>
 									</div>
 								</div>
@@ -108,14 +116,24 @@
 									<div class="form-group row mb-12">
 										<label class="col-form-label col-md-3 text-md-right">Total <?=$satuan?></label>
 										<div class="col-sm-12 col-md-9">
-											<input type="text" name="total_order"  value="" class="form-control">
-											<span class="text-error total_order"></span>
+											<input type="number" name="total_order"  onkeyup="count_harga()"  value="0" class="form-control">
+											<span class="text-error etotal_order"></span>
 										</div>
 									</div>
 								</div>
 									<?php endif;?>
+									<table class="table">
+										<tr>
+											<td>Total Biaya</td>
+											<td class="total_biaya"></td>
+										</tr>
+										<tr>
+											<td>Terbilang</td>
+											<td class="terbilang"></td>
+										</tr>
+									</table>
 								<div class="col-12 col-md-12 col-lg-12">
-									<button type="button" onclick="store_paket()" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Simpan
+									<button type="button" onclick="store_booking()" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Simpan
 										Paket</button>
 										<a href="<?=base_url('admin/paket_wisata')?>" class="btn btn-info btn-sm"><i class="fa fa-reply"></i> Kembali</a>
 								</div>
@@ -128,53 +146,7 @@
 	</section>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="add-foto" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<form action="<?=base_url('admin/upload_foto_paket');?>" enctype="multipart/form-data" id="store-image"
-			method="post">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Upload Foto</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="">Foto</label>
-						<input type="file" name="foto" id="" class="form-control" placeholder=""
-							aria-describedby="helpId">
-						<small id="helpId" class="text-muted text-error eimage">Foto yang diizinkan hanya JPG atau
-							PNG</small>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" onclick="store_image()" class="btn btn-primary">Simpan</button>
-				</div>
-			</div>
-		</form>
-	</div>
-</div>
-<!-- use for priview produk -->
 
-<div class="modal fade" id="modal-priview-image" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Image Produk</h5>
-			</div>
-			<div class="modal-body image-priview">
-				<img style="width: 100%;height: 500px;" src="<?=base_url()?>assets/img/no-image-found-360x260.png"
-					alt="">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 <script>
 	let id_paket = "<?=$id_paket?>";
 

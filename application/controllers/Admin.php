@@ -120,6 +120,13 @@ class Admin extends CI_Controller
         }
         $this->load->view('layout/template', $data, false);
     }
+    // edit paket wisata
+    public function edit_paket_wisata($id)
+    {
+        $data['content'] = 'admin/edit_paket_wisata';
+        $data['paket'] = $this->model->find_data('tb_paket_wisata', 'id_paket', $id)->row();
+        $this->load->view('layout/template', $data, false);
+    }
     // store paket wisata
     public function update_paket_wisata($status)
     {
