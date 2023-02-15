@@ -28,7 +28,9 @@
 		li.nav-item.cta-btn {
 			margin: 0 0 0 9px;
 		}
-
+		.active{
+			color: aliceblue;
+		}
 	</style>
 	<header role="banner">
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -41,13 +43,13 @@
 
 				<div class="collapse navbar-collapse" id="navbarsExample05">
 					<ul class="navbar-nav ml-auto pl-lg-5 pl-0">
-						<li class="nav-item">
-							<a class="nav-link active" href="<?=base_url();?>">Home</a>
+						<li class="nav-item cta-btn">
+							<a class="nav-link" href="<?=base_url();?>">Home</a>
 						</li>
 						<?php $name = $this->session->userdata('nama');
 $role = $this->session->userdata('role');?>
 
-						<li class="nav-item">
+						<li class="nav-item cta-btn">
 							<a class="nav-link" href="<?=base_url('controller/login');?>">Login</a>
 						</li>
 						<!-- <li class="nav-item">
