@@ -25,7 +25,7 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-							<button type="button" class="btn btn-warning" >Cetak</button> <a href="<?=base_url('admin/add_paket_wisata')?>" class="btn btn-success" >Tambah Paket</a>
+							<a href="<?=base_url('report/paket_wisata');?>" target="_blank" type="button" class="btn btn-warning" >Cetak</a> <a href="<?=base_url('admin/add_paket_wisata')?>" class="btn btn-success" >Tambah Paket</a>
 								<table class="table table-striped" id="table-1">
 									<thead>
 										<tr>
