@@ -222,6 +222,13 @@ $role = $this->session->userdata('role');?>
 			<div class="row no-gutters">
 				<div class="col-md-12">
 					<?php foreach ($paket_wisata as $key => $value): ?>
+						<?php if ($value->satuan == 1) {
+    $satuan = 'Per Orang';
+} elseif ($value->satuan == 2) {
+    $satuan = 'Per Kelompok';
+} elseif ($value->satuan == 3) {
+    $satuan = 'Per Pax';
+}?>
 					<?php if ($key % 2 == 0): ?>
 						<div class="sched d-block d-lg-flex">
 							<div class="bg-image order-2" style="background-image: url('<?=base_url($value->foto[0]->foto)?>');"
@@ -229,7 +236,7 @@ $role = $this->session->userdata('role');?>
 							<div class="text order-1">
 								<h3><?=$value->nama_paket?></h3>
 								<p><?=$value->keterangan?></p>
-								<p class="text-primary h3">Rp. <?=number_format($value->harga_paket)?></p>
+								<p class="text-primary h3">Rp. <?=number_format($value->harga_paket)?>/<?=$satuan?></p>
 								<?php if ($role == 'pelanggan'): ?>
 								<a href="<?=base_url('pelanggan/store_keranjang/' . $value->id_paket)?>" class="btn btn-success btn-sm">Order</a>
 									<?php else: ?>
@@ -244,7 +251,7 @@ $role = $this->session->userdata('role');?>
 							<div class="text">
 								<h3><?=$value->nama_paket?></h3>
 								<p><?=$value->keterangan?></p>
-								<p class="text-primary h3">Rp. <?=number_format($value->harga_paket)?></p>
+								<p class="text-primary h3">Rp. <?=number_format($value->harga_paket)?>/ <?=$satuan?></p>
 								<?php if ($role == 'pelanggan'): ?>
 								<a href="<?=base_url('pelanggan/store_keranjang/' . $value->id_paket)?>" class="btn btn-success btn-sm">Order</a>
 									<?php else: ?>

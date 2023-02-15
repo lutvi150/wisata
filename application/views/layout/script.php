@@ -8,6 +8,7 @@
   <script src="<?=base_url();?>assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
+	<script src="<?=base_url();?>assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
   <script src="<?=base_url();?>assets/modules/datatables/datatables.min.js"></script>
   <script src="<?=base_url();?>assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
   <script src="<?=base_url();?>assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
@@ -27,7 +28,9 @@
   <script src="<?=base_url()?>assets/js/costumejs/dashboard.js"></script>
   <?php elseif ($content == 'admin/user'): ?>
   <script src="<?=base_url()?>assets/js/costumejs/user.js"></script>
-	<?php elseif ($content == 'admin/add_paket_wisata' || $content == 'admin/paket_wisata'): ?>
+	<?php elseif ($content == 'pelanggan/keranjang'): ?>
+  <script src="<?=base_url()?>assets/js/costumejs/keranjang.js"></script>
+	<?php elseif ($content == 'admin/add_paket_wisata' || $content == 'admin/paket_wisata' || $content == 'admin/edit_paket_wisata'): ?>
 		<script src="<?=base_url()?>assets/js/costumejs/paketwisata.js"></script>
   <?php endif;?>
   <script>

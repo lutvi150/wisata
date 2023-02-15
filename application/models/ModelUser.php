@@ -20,6 +20,13 @@ class ModelUser extends CI_Model
         $this->db->where($this->password, hash('sha256', $password));
         return $this->db->get()->row();
     }
+    public function get_all_user(Type $var = null)
+    {
+        $this->db->from($this->table . " as a");
+        $this->db->join('tb_profil as b', 'a.id_user=b.id_user');
+        return $this->db->get()->result();
+
+    }
 }
 
 /* End of file ModelUser.php */

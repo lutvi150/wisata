@@ -22,7 +22,7 @@ class Admin extends CI_Controller
     {
         $data['content'] = 'admin/dashboard';
         $data['total_pengunjung'] = 0;
-        $data['total_paket_wisata'] = 0;
+        $data['total_paket_wisata'] = $this->paket_wisata->count_paket();
         $data['total_transaksi'] = 0;
         $this->load->view('layout/template', $data, false);
 
@@ -86,9 +86,20 @@ class Admin extends CI_Controller
     public function user(Type $var = null)
     {
         $data['content'] = 'admin/user';
-        $data['user'] = null;
+        $data['user'] = $this->user->get_all_user();
         $this->load->view('layout/template', $data, false);
 
+    }
+    // use for update role user
+    public function update_role(Type $var = null)
+    {
+        $post = $this->input->post();
+        $update = $this->model->update_data('tb_user', 'id_user', $post['id_user'], ['role' => $post['role']]);
+        $response = [
+            'status' => 'success',
+            'msg' => 'Update role user berhasil',
+        ];
+        echo json_encode($response);
     }
     // use for get vacation package
     public function paket_wisata(Type $var = null)
@@ -107,6 +118,13 @@ class Admin extends CI_Controller
         } else {
             $data['id_paket'] = $this->paket_wisata->insert_dummy_paket();
         }
+        $this->load->view('layout/template', $data, false);
+    }
+    // edit paket wisata
+    public function edit_paket_wisata($id)
+    {
+        $data['content'] = 'admin/edit_paket_wisata';
+        $data['paket'] = $this->model->find_data('tb_paket_wisata', 'id_paket', $id)->row();
         $this->load->view('layout/template', $data, false);
     }
     // store paket wisata

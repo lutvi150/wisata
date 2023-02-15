@@ -19,10 +19,16 @@ class Controller extends CI_Controller
     public function login(Type $var = null)
     {
         $role = $this->session->userdata('role');
+        $id_user = $this->session->userdata('id_user');
         if ($role == 'admin') {
             redirect('admin');
         } elseif ($role == 'pelanggan') {
-            redirect('pelanggan');
+            $check_data_user = $this->model->find_data('tb_profil', 'id_user', $id_user)->row();
+            if ($check_data_user == null) {
+                redirect('controller/isi_data_diri');
+            } else {
+                redirect('pelanggan');
+            }
         }
         $data = null;
         $this->load->view('auth/login', $data, false);
@@ -32,6 +38,11 @@ class Controller extends CI_Controller
         $data = null;
         $this->load->view('auth/register', $data, false);
 
+    }
+    public function isi_data_diri($var = null)
+    {
+        $data = null;
+        $this->load->view('pelanggan/isi_data_diri', $data);
     }
 // use for registration
     public function register_user(Type $var = null)

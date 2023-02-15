@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="<?=base_url();?>assets/modules/fontawesome/css/all.min.css">
 
   <!-- CSS Libraries -->
+	<link rel="stylesheet" href="<?=base_url();?>assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
 	<link rel="stylesheet" href="<?=base_url();?>assets/modules/ionicons/css/ionicons.min.css">
 	<link rel="stylesheet" href="<?=base_url();?>assets/modules/datatables/datatables.min.css">
   <link rel="stylesheet" href="<?=base_url();?>assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
