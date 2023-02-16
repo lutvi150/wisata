@@ -48,6 +48,25 @@ class Report extends CI_Controller
         $mpdf->Output('INVOICE.pdf', 'I');
         // echo json_encode($data);
     }
+    // data booking
+    public function data_booking(Type $var = null)
+    {
+        $data['transaksi'] = $this->model->transaksi();
+        $data['judul'] = 'DATA TRANSAKSI:';
+        $mpdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $mpdf->SetTitle('INVOICE');
+        $mpdf->SetAuthor('INVOICE');
+        $mpdf->SetCreator('INVOICE');
+        $mpdf->SetDisplayMode('fullpage');
+        // $mpdf->SetWatermarkText('LUNAS');
+        $mpdf->showWatermarkText = true;
+        $mpdf->watermark_font = 'DejaVuSansCondensed';
+        $mpdf->watermarkTextAlpha = 0.1;
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->WriteHTML($this->load->view('report/printTransaksi', $data, true));
+        $mpdf->Output('data transaksi.pdf', 'I');
+
+    }
 
 }
 

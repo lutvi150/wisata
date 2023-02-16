@@ -25,7 +25,7 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-							<button type="button" class="btn btn-warning" >Cetak</button>
+							<a href="<?=base_url('report/data_booking');?>" target="_blank" type="button" class="btn btn-warning" >Cetak</a>
 								<table class="table table-striped" id="table-1">
 									<thead>
 										<tr>
@@ -33,31 +33,42 @@
 												NO.
 											</th>
 											<th>Nomor Booking</th>
+											<th>Nama User</th>
 											<th>Nama Paket</th>
 											<th>Tanggal Booking</th>
-											<th>Peserta</th>
+											<th>Peserta/Satuan</th>
 											<th>Jumlah Biaya</th>
 											<th>Status</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php foreach ($transaksi as $key => $value): ?>
+											<?php if ($value->satuan == 1) {
+    $satuan = 'Orang';
+} elseif ($value->satuan == 2) {
+    $satuan = 'Kelompok';
+} elseif ($value->satuan == 3) {
+    $satuan = 'Pax';
+}?>
 										<tr>
 											<td>
-												1
+												<?=$key + 1?>
 											</td>
-											<td>Nama</td>
-											<td>Nama Paket
+											<td><?=$value->nomor_booking?></td>
+											<td><?=$value->nama?></td>
+											<td><?=$value->nama_paket;?>
 											</td>
-											<td>Orang/ Rombongan
+											<td><?=$value->tanggal_booking;?>
 											</td>
-											<td><div class="badge badge-success">0</div></td>
+											<td><div class="badge badge-success"><?=$value->jumlah_peserta . " " . $satuan?></div></td>
 											<td class="text-center">
-												<div class="badge badge-success">0</div>
+												<div class="badge badge-success">Rp.<?=number_format($value->total_biaya)?></div>
 											</td>
-											<td>Status</td>
-											<td><a href="#" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Detail</a></td>
+											<td>Lunas</td>
+											<td></td>
 										</tr>
+										<?php endforeach;?>
 									</tbody>
 								</table>
 							</div>

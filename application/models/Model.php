@@ -95,7 +95,14 @@ class Model extends CI_Model
         $this->db->join('tb_profil as c', 'b.id_user = c.id_user');
         $this->db->join('tb_paket_wisata as d', 'a.id_paket = d.id_paket');
         return $this->db->get()->row();
-
+    }
+    public function transaksi(Type $var = null)
+    {
+        $this->db->from('tb_data_booking as a');
+        $this->db->join('tb_user as b', 'a.id_user = b.id_user');
+        $this->db->join('tb_profil as c', 'b.id_user = c.id_user');
+        $this->db->join('tb_paket_wisata as d', 'a.id_paket = d.id_paket');
+        return $this->db->get()->result();
     }
 }
 

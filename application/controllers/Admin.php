@@ -236,7 +236,7 @@ class Admin extends CI_Controller
     public function transaksi(Type $var = null)
     {
         $data['content'] = 'admin/transaksi';
-        $data['transaksi'] = null;
+        $data['transaksi'] = $this->model->transaksi();
         $this->load->view('layout/template', $data, false);
     }
 
