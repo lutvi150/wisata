@@ -30,6 +30,24 @@ class Report extends CI_Controller
         $mpdf->Output('Laporan Paket Wisata.pdf', 'I');
         // echo json_encode($data['kartu']);
     }
+    public function invoice($id_booking)
+    {
+        $data['transaksi'] = $this->model->transaksi_invoice($id_booking);
+        $data['judul'] = 'INVOICE BOOKING NOMOR:';
+        $mpdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $mpdf->SetTitle('INVOICE');
+        $mpdf->SetAuthor('INVOICE');
+        $mpdf->SetCreator('INVOICE');
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->SetWatermarkText('LUNAS');
+        $mpdf->showWatermarkText = true;
+        $mpdf->watermark_font = 'DejaVuSansCondensed';
+        $mpdf->watermarkTextAlpha = 0.1;
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->WriteHTML($this->load->view('report/invoice', $data, true));
+        $mpdf->Output('INVOICE.pdf', 'I');
+        // echo json_encode($data);
+    }
 
 }
 

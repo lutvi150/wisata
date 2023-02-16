@@ -72,9 +72,10 @@
 											</td>
 											<td></td>
 											<td>
-												<?php if ($value->status == "Menunggu Pembayaran"): ?>
+												<?php if ($value->status_pembayaran == "Menunggu Pembayaran"): ?>
 												<a href="#" onclick="hapus(<?=$value->id_paket?>)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 												<?php endif;?>
+												<a class="btn btn-warning btn-sm" href="<?=base_url('report/invoice/'.$value->id_booking)?>" target="_blank">Invoice</a>
 											</td>
 										</tr>
 										<?php endforeach;?>
